@@ -1,0 +1,10 @@
+main{
+    background: url('../../assets/images/doctor-small.png');
+    /* background-size: cover; */
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+main div{
+    background:  linear-gradient(rgba(0, 0, 0, 0.218), rgba(0, 0, 0, 0.218));
+    width: 100%;
+}
