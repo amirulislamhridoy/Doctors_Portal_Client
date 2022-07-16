@@ -3,6 +3,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../Firebase.init";
+import useToken from "../Hooks/useToken";
 import Loading from "../Loading/Loading";
 
 const SignUp = () => {
@@ -17,6 +18,8 @@ const SignUp = () => {
     useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);
 
+  const [token] = useToken(user || gUser)
+
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password)
     await updateProfile({displayName: data.name})
@@ -24,7 +27,7 @@ const SignUp = () => {
   if(loading || gLoading){
     return <Loading></Loading>
   }
-  if(user || gUser){
+  if(token){
     navigate('/')
   }
   return (

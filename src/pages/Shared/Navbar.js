@@ -21,7 +21,7 @@ const Navbar = () => {
       <li>
         <CustomLink to="/reviews">Reviews</CustomLink>
       </li>
-      <li>
+      <li className='min-w-fit'>
         <CustomLink to="/contactUs">Contact Us</CustomLink>
       </li>
       <li>
@@ -32,7 +32,7 @@ const Navbar = () => {
           <CustomLink to="/dashboard">Dashboard</CustomLink>
         </li>
       )}
-      <li>
+      <li className='min-w-fit'>
         {user ? (
           <CustomLink onClick={logout} to="/login">
             Sign Out
