@@ -12,10 +12,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./pages/Dashboard/Dashboard";
 import MyAppointments from "./pages/Dashboard/MyAppointments";
 import MyReviews from './pages/Dashboard/MyReviews';
-import Admin from "./pages/Dashboard/Admin";
+import Users from "./pages/Dashboard/Users";
+import MyHistory from "./pages/Dashboard/MyHistory";
 
 function App() {
-  const [theme, setTheme] = useState(false)
   return (
     <div className='max-w-7xl mx-auto'>
       <Navbar></Navbar>
@@ -32,8 +32,9 @@ function App() {
           </RequireAuth>
         }>
           <Route index element={<MyAppointments />} />
-          <Route path='admin' element={<Admin />} />
           <Route path=':myReview' element={<MyReviews />} />
+          <Route path='users' element={<Users />} />
+          <Route path='myHistory' element={<MyHistory />} />
         </Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<SignUp />}></Route>

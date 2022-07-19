@@ -2,17 +2,37 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../Firebase.init";
+import { signOut } from "firebase/auth";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/booking?patient=${user?.email}`)
-        .then((res) => res.json())
-        .then((data) => setAppointments(data));
+      fetch(`http://localhost:5000/booking?patient=${user?.email}`, {
+        method: 'GET',
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((res) => {
+          if(res.status === 403){
+            toast.error("Forbidden error")
+            navigate('/login')
+            signOut(auth)
+            localStorage.removeItem('accessToken')
+          }
+          return res.json()
+        })
+        .then((data) => {
+          setAppointments(data)
+        });
     }
   }, [user]);
 
@@ -32,8 +52,8 @@ const MyAppointments = () => {
             </tr>
           </thead>
           <tbody>
-            {appointments.map((a, i) => (
-              <tr>
+            {appointments?.map((a, i) => (
+              <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{a.patientName}</td>
                 <td>{a.date}</td>
