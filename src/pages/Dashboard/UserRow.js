@@ -29,12 +29,12 @@ const UserRow = ({ user, i, refetch }) => {
       <th>{i + 1}</th>
       <td>{user.email}</td>
       <td>
-        {user.role === "admin" || <button class="btn btn-xs btn-outline" onClick={() => makeAdmin(user)}>
+        {user.role === "admin" || <button className="btn btn-xs btn-outline" onClick={() => makeAdmin(user)}>
           Make Admin
         </button>}
       </td>
       <td>
-        <button class="btn btn-xs btn-outline">Remove User</button>
+        <button className="btn btn-xs btn-outline">Remove User</button>
       </td>
     </tr>
   );
