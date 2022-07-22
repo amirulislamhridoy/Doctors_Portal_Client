@@ -5,7 +5,7 @@ const useAdmin = (user) => {
     const [adminLoading, setAdminLoading] = useState(true)
     const email = user?.email
     if(email){
-        fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/admin/${email}`)
+        fetch(`http://localhost:5000/admin/${email}`)
         .then(res => res.json())
         .then(data => {
             setAdmin(data.admin)

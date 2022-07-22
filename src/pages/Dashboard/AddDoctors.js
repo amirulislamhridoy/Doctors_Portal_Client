@@ -13,7 +13,7 @@ const AddDoctors = () => {
   const uploadApiKey = "893909661bf063b7b6747914cb9d81f0";
 
   const { isLoading, error, data: services } = useQuery('services', () =>
-     fetch('https://doctors-portal-server-2nd-time.herokuapp.com/service').then(res =>
+     fetch('http://localhost:5000/service').then(res =>
        res.json()
      )
    )
@@ -39,7 +39,7 @@ const AddDoctors = () => {
             specificity: data.specificity,
             photo: result.data.url,
           };
-          fetch('https://doctors-portal-server-2nd-time.herokuapp.com/doctor', {
+          fetch('http://localhost:5000/doctor', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

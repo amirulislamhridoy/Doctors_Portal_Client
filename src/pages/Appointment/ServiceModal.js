@@ -26,7 +26,7 @@ const ServiceModal = ({ treatment, date, setTreatment, refetch }) => {
       phone: event.target.phone.value
     };
     
-    fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/booking`, {
+    fetch(`http://localhost:5000/booking`, {
       method: "POST",
       body: JSON.stringify(booking),
       headers: {

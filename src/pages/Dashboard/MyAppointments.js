@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../Firebase.init";
 import { signOut } from "firebase/auth";
@@ -14,7 +14,7 @@ const MyAppointments = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/booking?patient=${user?.email}`, {
+      fetch(`http://localhost:5000/booking?patient=${user?.email}`, {
         method: 'GET',
         headers: {
           authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -24,14 +24,16 @@ const MyAppointments = () => {
         .then((res) => {
           if(res.status === 403){
             toast.error("Forbidden error")
-            signOut(auth)}
+            signOut(auth)
             navigate('/login')
             localStorage.removeItem('accessToken')
-            return res.json()
+          }
+          return res.json()
         })
         .then((data) => {
           setAppointments(data)
         });
+
     }
   }, [user]);
 

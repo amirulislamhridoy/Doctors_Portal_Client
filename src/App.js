@@ -53,5 +53,5 @@ function App() {
     </div>
   );
 }
-//(server url) => https://doctors-portal-server-2nd-time.herokuapp.com/
+//(server url) => http://localhost:5000/
 export default App;
