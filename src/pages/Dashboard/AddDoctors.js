@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from 'react-query'
 import { toast } from "react-toastify";
+import Loading from '../Loading/Loading'
 
 const AddDoctors = () => {
   const {
@@ -60,6 +61,10 @@ const AddDoctors = () => {
       });
   };
 
+  if(isLoading){
+    return <Loading />
+  }
+
   return (
     <div className="card w-96 bg-base-100 shadow-xl mt-5">
       <div className="card-body">
@@ -112,7 +117,7 @@ const AddDoctors = () => {
               {...register("specificity")}
               className="border rounded-md border-gray-300 px-1 py-2 mb-3"
             >
-              {services.map(service => <option
+              {services?.map(service => <option
                 value={service.name}
                 key={service._id}
               >{service.name}</option>)}
