@@ -7,7 +7,12 @@ import DeleteConfirmModal from "./DeleteConfirmModal";
 const ManageDoctor = () => {
   const [deleteModal, setDeleteModal] = useState(null);
   const {isLoading,error,data: doctors, refetch} = useQuery("doctors", () =>
-    fetch("https://doctors-portal-server-2nd-time.herokuapp.com/doctor").then((res) => res.json())
+    fetch("http://localhost:5000/doctor", {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + localStorage.getItem('accessToken')
+      }
+    }).then((res) => res.json())
   );
 
   if (isLoading) {

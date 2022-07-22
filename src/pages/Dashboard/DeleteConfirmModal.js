@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const DeleteConfirmModal = ({deleteModal, setDeleteModal, refetch}) => {
 
     const deleteModalFun = () => {
-        fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/doctor/${deleteModal._id}`, {
+        fetch(`http://localhost:5000/doctor/${deleteModal._id}`, {
             method: 'DELETE',
         }).then(res => res.json())
         .then(data => {

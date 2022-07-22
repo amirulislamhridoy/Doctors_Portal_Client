@@ -21,7 +21,7 @@ const Dashboard = () => {
 
         <div className="drawer-side ">
           <label htmlFor="dashboard" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-52 text-base-content">
+          <ul className="menu p-4 overflow-y-auto w-52 lg:bg-inherit bg-gray-50 text-base-content">
             <li><Link to="/dashboard">My Appointments</Link></li>
             <li><Link to="/dashboard/:reviews">My reviews</Link></li>
             <li><Link to="/dashboard/myHistory">My History</Link></li>

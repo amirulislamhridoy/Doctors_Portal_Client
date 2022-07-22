@@ -6,7 +6,7 @@ const useToken = (user) => {
   const email = user?.user?.email;
   useEffect(() => {
     if (email) {
-      fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/user/${email}`, {
+      fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
         body: JSON.stringify({email: email}),
         headers: {
