@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Footer from '../Shared/Footer';
 import AppointmentBanner from './AppointmentBanner';
 import AvailAbleAppointment from './AvailAbleAppointment';
 
-const Appointment = () => {
-    const [date, setDate] = useState(new Date());
+const Appointment = ({date, setDate}) => {
     return (
         <main>
             <AppointmentBanner date={date} setDate={setDate}></AppointmentBanner>

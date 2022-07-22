@@ -16,8 +16,10 @@ import MyHistory from "./pages/Dashboard/MyHistory";
 import RequireAdmin from "./pages/Shared/RequireAdmin";
 import AddDoctors from "./pages/Dashboard/AddDoctors";
 import ManageDoctor from "./pages/Dashboard/ManageDoctor";
+import { useState } from "react";
 
 function App() {
+  const [date, setDate] = useState(new Date());
   return (
     <div className='max-w-7xl mx-auto'>
       <Navbar></Navbar>
@@ -25,7 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="appointment" element={
           <RequireAuth>
-            <Appointment />
+            <Appointment date={date} setDate={setDate} />
           </RequireAuth>
         } />
         <Route path='/dashboard' element={
@@ -33,7 +35,7 @@ function App() {
             <Dashboard />
           </RequireAuth>
         }>
-          <Route index element={<MyAppointments />} />
+          <Route index element={<MyAppointments  date={date} setDate={setDate} />} />
           <Route path=':myReview' element={<MyReviews />} />
           <Route path='users' element={
             <RequireAdmin>
