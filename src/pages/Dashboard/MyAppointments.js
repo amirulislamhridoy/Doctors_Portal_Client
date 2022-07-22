@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../Firebase.init";
 import { signOut } from "firebase/auth";
@@ -24,11 +24,10 @@ const MyAppointments = () => {
         .then((res) => {
           if(res.status === 403){
             toast.error("Forbidden error")
+            signOut(auth)}
             navigate('/login')
-            signOut(auth)
             localStorage.removeItem('accessToken')
-          }
-          return res.json()
+            return res.json()
         })
         .then((data) => {
           setAppointments(data)

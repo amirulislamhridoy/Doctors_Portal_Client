@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import { useState } from "react";
 import Navbar from "./pages/Shared/Navbar";
 import Appointment from './pages/Appointment/Appointment'
 import Login from './pages/Login/Login'
@@ -15,6 +14,7 @@ import MyReviews from './pages/Dashboard/MyReviews';
 import Users from "./pages/Dashboard/Users";
 import MyHistory from "./pages/Dashboard/MyHistory";
 import RequireAdmin from "./pages/Shared/RequireAdmin";
+import AddDoctors from "./pages/Dashboard/AddDoctors";
 
 function App() {
   return (
@@ -38,7 +38,12 @@ function App() {
             <RequireAdmin>
               <Users />
             </RequireAdmin>
-          } />
+          }></Route>
+          <Route path='addDoctors' element={
+            <RequireAdmin>
+              <AddDoctors />
+            </RequireAdmin>
+          }></Route>
           <Route path='myHistory' element={<MyHistory />} />
         </Route>
         <Route path='/login' element={<Login />}></Route>
@@ -48,5 +53,5 @@ function App() {
     </div>
   );
 }
-
+//(server url) => https://doctors-portal-server-2nd-time.herokuapp.com/
 export default App;
