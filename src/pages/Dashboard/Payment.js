@@ -24,16 +24,16 @@ const Payment = () => {
   const stripePromise = loadStripe('pk_test_51L3yxyGxDf7DYIvzB2dADBrYRLv1V6ynAao5VILfSswUx6XUNts49HImSyLVwIBcx9HPvXz17bEpK5EVFNhIOcYl00TB8aBnAO')
   return (
     <div>
-      <div class="card w-96 bg-base-100 shadow-xl my-5">
-        <div class="card-body">
-          <p class="text-success font-bold">Hello, {patientName}</p>
+      <div className="card w-96 bg-base-100 shadow-xl my-5">
+        <div className="card-body">
+          <p className="text-success font-bold">Hello, {patientName}</p>
           <h2 className='cart-title'>Please Pay for {treatment}</h2>
           <p>Your Appointment: <span className='text-orange-700'>{date}</span></p>
           <p>Please pay: ${price}</p>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
+      <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card-body">
           <Elements stripe={stripePromise}>
             <CheckoutForm appointment={appointment} />
           </Elements>
