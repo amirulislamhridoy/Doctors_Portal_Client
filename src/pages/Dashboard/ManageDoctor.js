@@ -7,7 +7,7 @@ import DeleteConfirmModal from "./DeleteConfirmModal";
 const ManageDoctor = () => {
   const [deleteModal, setDeleteModal] = useState(null);
   const {isLoading,error,data: doctors, refetch} = useQuery("doctors", () =>
-    fetch("https://doctors-portal-server-2nd-time.herokuapp.com/doctor", {
+    fetch("http://localhost:5000/doctor", {
       method: 'GET',
       headers: {
         authorization: 'Bearer ' + localStorage.getItem('accessToken')
@@ -21,8 +21,8 @@ const ManageDoctor = () => {
 
   return (
     <div>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th></th>
@@ -37,8 +37,8 @@ const ManageDoctor = () => {
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>
-                  <div class="avatar">
-                    <div class="w-16 rounded">
+                  <div className="avatar">
+                    <div className="w-16 rounded">
                       <img
                         src={doctor.photo}
                         alt="Tailwind-CSS-Avatar-component"
@@ -49,7 +49,7 @@ const ManageDoctor = () => {
                 <td>{doctor.name}</td>
                 <td>{doctor.specificity}</td>
                 <td>
-                  <label onClick={() => setDeleteModal(doctor)} for="delete-confirm-modal" class="btn btn-error text-white btn-xs">
+                  <label onClick={() => setDeleteModal(doctor)} htmlFor="delete-confirm-modal" className="btn btn-error text-white btn-xs">
                     Delete
                   </label>
                 </td>

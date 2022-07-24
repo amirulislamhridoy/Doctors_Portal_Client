@@ -3,9 +3,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../Firebase.init";
 import { signOut } from "firebase/auth";
 import CustomLink from "../CustomLink/CustomLink";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
+  const location = useLocation()
 
   const logout = () => {
     localStorage.removeItem('accessToken')
@@ -77,7 +79,7 @@ const Navbar = () => {
         <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal p-0">{menu}</ul>
         </div>
-        <div className='navbar-end lg:hidden'>
+        {location.pathname === '/dashboard' && <div className='navbar-end lg:hidden'>
           <label
             htmlFor="dashboard"
             className="btn  drawer-button"
@@ -97,7 +99,7 @@ const Navbar = () => {
               />
             </svg>
           </label>
-        </div>
+        </div>}
       </nav>
     </>
   );

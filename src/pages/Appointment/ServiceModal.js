@@ -5,7 +5,7 @@ import auth from "../../Firebase.init";
 import { toast } from 'react-toastify';
 
 const ServiceModal = ({ treatment, date, setTreatment, refetch }) => {
-  const { _id, name, slots } = treatment;
+  const { _id, name, slots, price } = treatment;
   const [user, loading, error] = useAuthState(auth);
   const formateDate = format(date, "PP");
 
@@ -21,12 +21,13 @@ const ServiceModal = ({ treatment, date, setTreatment, refetch }) => {
       treatment: name,
       date: formateDate,
       slot,
+      price,
       patient: user.email,
       patientName: user.displayName,
       phone: event.target.phone.value
     };
     
-    fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/booking`, {
+    fetch(`http://localhost:5000/booking`, {
       method: "POST",
       body: JSON.stringify(booking),
       headers: {

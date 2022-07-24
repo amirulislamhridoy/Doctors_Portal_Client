@@ -20,7 +20,7 @@ const MyAppointments = ({date, setDate}) => {
 
   useEffect(() => {
     if (user) {
-      fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/booking?patient=${user?.email}`, {
+      fetch(`http://localhost:5000/booking?patient=${user?.email}`, {
         method: 'GET',
         headers: {
           authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -42,7 +42,7 @@ const MyAppointments = ({date, setDate}) => {
     }
   }, [user]);
   const { isLoading, data: toDayData } = useQuery(['appointment', date], () =>
-     fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/bookingSelectDay?patient=${user?.email}&date=${formateDate}`,{
+     fetch(`http://localhost:5000/bookingSelectDay?patient=${user?.email}&date=${formateDate}`,{
       method: 'GET',
       headers:{
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -57,9 +57,9 @@ const MyAppointments = ({date, setDate}) => {
     <div>
       <header className='flex justify-between items-center'>
         <h2 className="text-3xl font-medium mb-5">My Appointments</h2>
-        <div class="dropdown dropdown-end">
-          <label tabindex="0" class="btn btn-outline m-1">{formateDate}</label>
-          <div tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
+        <div className="dropdown dropdown-end">
+          <label tabIndex="0" className="btn btn-outline m-1">{formateDate}</label>
+          <div tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
             <DayPicker mode="single" selected={date} onSelect={setDate}  />
           </div>
         </div>
@@ -75,6 +75,7 @@ const MyAppointments = ({date, setDate}) => {
               <th>Date</th>
               <th>Time</th>
               <th>Treatment</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
@@ -95,6 +96,7 @@ const MyAppointments = ({date, setDate}) => {
               <th>Date</th>
               <th>Time</th>
               <th>Treatment</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>

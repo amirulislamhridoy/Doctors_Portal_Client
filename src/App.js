@@ -16,6 +16,7 @@ import MyHistory from "./pages/Dashboard/MyHistory";
 import RequireAdmin from "./pages/Shared/RequireAdmin";
 import AddDoctors from "./pages/Dashboard/AddDoctors";
 import ManageDoctor from "./pages/Dashboard/ManageDoctor";
+import Payment from './pages/Dashboard/Payment'
 import { useState } from "react";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         }>
           <Route index element={<MyAppointments  date={date} setDate={setDate} />} />
           <Route path=':myReview' element={<MyReviews />} />
+          <Route path='payment/:id' element={<Payment />} />
           <Route path='users' element={
             <RequireAdmin>
               <Users />
@@ -61,5 +63,6 @@ function App() {
     </div>
   );
 }
-//(server url) => https://doctors-portal-server-2nd-time.herokuapp.com/
+//(server url) => http://localhost:5000/
+// http://localhost:5000/
 export default App;
