@@ -63,6 +63,4 @@ function App() {
     </div>
   );
 }
-//(server url) => http://localhost:5000/
-// http://localhost:5000/
 export default App;

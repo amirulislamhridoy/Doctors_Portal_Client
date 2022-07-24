@@ -13,7 +13,7 @@ const MyAppointmentRow = (props) => {
       <td>{treatment}</td>
       <td>
         {(price && !paid) && <Link to={`/dashboard/payment/${_id}`}><button className='btn btn-success btn-xs'>pay</button></Link>}
-        {(price && paid) && <button className='btn btn-xs btn-success'>Paid</button>}
+        {(price && paid) && <button className='btn btn-xs'>Paid</button>}
       </td>
     </tr>
   );

@@ -20,7 +20,7 @@ const MyAppointments = ({date, setDate}) => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/booking?patient=${user?.email}`, {
+      fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/booking?patient=${user?.email}`, {
         method: 'GET',
         headers: {
           authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -42,7 +42,7 @@ const MyAppointments = ({date, setDate}) => {
     }
   }, [user]);
   const { isLoading, data: toDayData } = useQuery(['appointment', date], () =>
-     fetch(`http://localhost:5000/bookingSelectDay?patient=${user?.email}&date=${formateDate}`,{
+     fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/bookingSelectDay?patient=${user?.email}&date=${formateDate}`,{
       method: 'GET',
       headers:{
         authorization: `Bearer ${localStorage.getItem('accessToken')}`

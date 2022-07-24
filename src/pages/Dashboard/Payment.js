@@ -2,8 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import Loading from "../Loading/Loading";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutFrom";
 
 const Payment = () => {
@@ -14,14 +14,14 @@ const Payment = () => {
     error,
     data: appointment,
   } = useQuery(["service", id], () =>
-    fetch(`http://localhost:5000/booking/${id}`).then((res) => res.json())
+    fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/booking/${id}`).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading />;
   }
   const {date, treatment, price, slot, patientName } = appointment
 
-  const stripePromise = loadStripe('pk_test_51L3yxyGxDf7DYIvzB2dADBrYRLv1V6ynAao5VILfSswUx6XUNts49HImSyLVwIBcx9HPvXz17bEpK5EVFNhIOcYl00TB8aBnAO')
+  // const stripePromise = loadStripe('pk_test_51L3yxyGxDf7DYIvzB2dADBrYRLv1V6ynAao5VILfSswUx6XUNts49HImSyLVwIBcx9HPvXz17bEpK5EVFNhIOcYl00TB8aBnAO')
   return (
     <div>
       <div class="card w-96 bg-base-100 shadow-xl my-5">
@@ -34,9 +34,9 @@ const Payment = () => {
       </div>
       <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
-          <Elements stripe={stripePromise}>
+          {/* <Elements stripe={stripePromise}> */}
             <CheckoutForm appointment={appointment} />
-          </Elements>
+          {/* </Elements> */}
         </div>
       </div>
     </div>

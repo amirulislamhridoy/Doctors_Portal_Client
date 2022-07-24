@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const CheckoutForm = ({ appointment }) => {
-  const { price, patient, patientName } = appointment;
+  const { _id, price, patient, patientName } = appointment;
   const stripe = useStripe();
   const elements = useElements();
+  const [success, setSuccess] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [paymentError, setPaymentError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [transactionId, setTransactionId] = useState('')
+  const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://doctors-portal-server-2nd-time.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,13 +68,24 @@ const CheckoutForm = ({ appointment }) => {
           },
         },
       });
-    if(intentError){
-      setPaymentError(intentError.message)
-      setTransactionId('')
-    }else{
-      setSuccess('Congrats, your payment is success.')
-      setPaymentError('')
-      setTransactionId(paymentIntent.id)
+    if (intentError) {
+      setPaymentError(intentError.message);
+      setTransactionId("");
+    } else {
+      fetch(`https://doctors-portal-server-2nd-time.herokuapp.com/booking/${_id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ transactionId: paymentIntent.id }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setSuccess("Congrats, your payment is success.");
+          setPaymentError("");
+          setTransactionId(paymentIntent.id);
+        });
     }
   };
   return (
@@ -100,11 +111,16 @@ const CheckoutForm = ({ appointment }) => {
           Pay
         </button>
       </form>
-        {paymentError && <p className="text-red-400">{paymentError}</p>}
-        {success && <div className='text-green-500'>
-          <p>{success}</p>  
-          <p>Your transaction Id: <span className='text-orange-500'>{transactionId}</span></p>
-        </div>}
+      {paymentError && <p className="text-red-400">{paymentError}</p>}
+      {success && (
+        <div className="text-green-500">
+          <p>{success}</p>
+          <p>
+            Your transaction Id:{" "}
+            <span className="text-orange-500">{transactionId}</span>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
